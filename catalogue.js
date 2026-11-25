@@ -1,5 +1,3 @@
-// Set this to a customer-facing CrewKit inbox to enable email drafts.
-const quoteEmail = '';
 const dncPants = 'https://www.dncworkwear.com.au/categories/Workwear/Work-Pants';
 const dncCoveralls = 'https://www.dncworkwear.com.au/ProductDisplay.aspx?filterProduct=CategoryCode%3Ane%3ASX99&productsearch=coveralls';
 const catalogue = [
@@ -116,51 +114,32 @@ function renderItems() {
 }
 
 for (const id of ['search','brand','category']) byId(id).addEventListener('input', renderCatalogue);
-if (quoteEmail) byId('quote-action').textContent = 'Open email draft';
 
 byId('quote-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const fields = new FormData(event.currentTarget);
+  const form = event.currentTarget;
+  const fields = new FormData(form);
   const status = byId('form-status');
   if (!quote.size && !fields.get('extra').trim()) {
+    event.preventDefault();
     status.textContent = 'Add a catalogue item or enter an unlisted style.';
     return;
   }
   for (const entry of quote.values()) {
     if (!entry.sizes.trim()) {
+      event.preventDefault();
       status.textContent = `Enter sizes and quantities for ${entry.sku}.`;
       byId(`sizes-${entry.sku}`).focus();
       return;
     }
   }
-  const lines = [
-    'CrewKit Workwear quote request', '',
-    `Name: ${fields.get('name')}`, `Company: ${fields.get('company') || '—'}`,
-    `Email: ${fields.get('email')}`, `Delivery postcode: ${fields.get('postcode')}`,
-    `Required by: ${fields.get('date') || 'Flexible'}`, `Decoration: ${fields.get('decoration')}`, '',
-    ...[...quote.values()].map((entry) => {
-      const product = catalogue.find((item) => item.sku === entry.sku);
-      return `${product.brand} | ${entry.sku} | ${product.name} | ${entry.colour || 'Colour to confirm'} | ${entry.sizes}`;
-    }),
-    '', `Unlisted items: ${fields.get('extra') || 'None'}`, `Notes: ${fields.get('notes') || 'None'}`
-  ];
-  const request = lines.join('\n');
-  if (quoteEmail) {
-    window.location.href = `mailto:${quoteEmail}?subject=${encodeURIComponent(lines[0])}&body=${encodeURIComponent(request)}`;
-    status.textContent = 'Send the draft from your email app. You can attach your logo there.';
-    return;
-  }
-
-  const url = URL.createObjectURL(new Blob([request], {type:'text/plain;charset=utf-8'}));
-  const link = element('a');
-  link.href = url;
-  link.download = 'crewkit-quote-request.txt';
-  document.body.append(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  status.textContent = 'Your quote request was downloaded. An email needs to be sent separately.';
+  byId('quote-items').value = [...quote.values()].map((entry) => {
+    const product = catalogue.find((item) => item.sku === entry.sku);
+    return `${product.brand} | ${entry.sku} | ${product.name} | ${entry.colour || 'Colour to confirm'} | ${entry.sizes}`;
+  }).join('\n');
+  status.textContent = 'Sending your quote request…';
 });
 
 renderCatalogue();
 renderItems();
+
+byId('quote-action').disabled = false;
