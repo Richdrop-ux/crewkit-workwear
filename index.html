@@ -5,15 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Browse workwear from Workcraft, DNC and Portwest. Build an itemised request for your crew's uniforms and branding.">
 <title>CrewKit Workwear | Australian Workwear Catalogue</title>
-<link rel="stylesheet" href="style.css?v=photos">
-<script defer src="catalogue.js?v=20-styles"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&amp;family=Barlow+Condensed:wght@800;900&amp;display=swap">
+<link rel="stylesheet" href="style.css?v=50-styles">
+<script defer src="catalogue.js?v=50-styles"></script>
 </head>
 <body>
 <header><div class="wrap nav"><a class="logo" href="#">CREW<span>KIT</span><small>WORKWEAR</small></a><nav aria-label="Main navigation"><a href="#catalogue">Catalogue</a><a class="outline" href="#quote">Quote list <b id="count">0</b></a></nav></div></header>
 <main>
 <section class="hero"><div class="wrap hero-grid"><div><p class="eyebrow">WORKWEAR FOR AUSTRALIAN TEAMS</p><h1>Kit out<br>your crew.</h1><p>Find workwear for the whole team. Choose your styles, add your size breakdown and tell us if you need embroidery or printing.</p><a class="button" href="#catalogue">Browse workwear</a></div><div class="hero-art" aria-hidden="true"><div class="tape"></div><div class="tape second"></div></div></div></section>
 <section class="wrap catalogue" id="catalogue"><div class="heading"><div><p class="eyebrow">WORKCRAFT · DNC · PORTWEST</p><h2>Workwear catalogue</h2></div><a href="#quote">Request an unlisted style</a></div>
-<div class="filters"><label>Search<input id="search" type="search" placeholder="Product name or code"></label><label>Brand<select id="brand"><option value="">All brands</option><option>Workcraft</option><option>DNC Workwear</option><option>Portwest / Huski</option></select></label><label>Category<select id="category"><option value="">All categories</option><option>Shirts</option><option>Pants</option><option>Shorts</option><option>Jackets</option><option>Vests</option><option>Coveralls</option></select></label></div>
+<div class="filters"><label>Search<input id="search" type="search" placeholder="Product name or code"></label><label>Brand<select id="brand"><option value="">All brands</option><option>Workcraft</option><option>DNC Workwear</option><option>Portwest / Huski</option></select></label><label>Category<select id="category"><option value="">All categories</option><option>Shirts</option><option>Pants</option><option>Shorts</option><option>Jackets</option><option>Coats</option><option>Vests</option><option>Coveralls</option></select></label></div>
 <p id="results" role="status"></p><div id="products" class="products"></div>
 </section>
 <section id="quote" class="quote-section"><div class="wrap quote-grid"><div><p class="eyebrow">TEAM ORDERS</p><h2>Your quote list</h2><p>Include your preferred colours and quantities by size. We’ll confirm availability, decoration options and delivery when quoting.</p><div id="items"></div><p id="feedback" role="status"></p></div>
