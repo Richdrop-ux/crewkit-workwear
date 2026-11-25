@@ -4,3 +4,14 @@
 @media(max-width:480px){.products,.filters{grid-template-columns:1fr}.heading{align-items:start;flex-direction:column}.nav,nav{gap:10px}.nav nav{font-size:.88rem}footer .nav{padding:16px 0;align-items:start}}
 
 .product-photo{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;background:white;border-bottom:1px solid var(--line);padding:10px}
+
+/* Display type and catalogue hierarchy */
+body{font-family:"Barlow",system-ui,sans-serif;font-size:1.0625rem}
+.hero h1,h2,.logo{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-.025em}
+.hero h1{font-size:clamp(4.8rem,12vw,9.5rem);line-height:.84}
+h2{font-size:clamp(2.6rem,6vw,4.8rem);line-height:.95}
+h3{font-family:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;font-weight:800;font-size:1.65rem;line-height:1}
+.hero .eyebrow,.heading .eyebrow{letter-spacing:.19em;font-weight:800}
+.card p{font-weight:750;letter-spacing:.055em;text-transform:uppercase}
+.card .button{margin-top:auto}
+@media(max-width:480px){.hero h1{font-size:clamp(4rem,15vw,6rem)}}
