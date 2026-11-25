@@ -1,12 +1,12 @@
 const dncPants = 'https://www.dncworkwear.com.au/categories/Workwear/Work-Pants';
 const dncCoveralls = 'https://www.dncworkwear.com.au/ProductDisplay.aspx?filterProduct=CategoryCode%3Ane%3ASX99&productsearch=coveralls';
 const catalogue = [
-  {sku:'WSL503', brand:'Workcraft', category:'Shirts', name:'Hi-vis long-sleeve work shirt', source:'https://www.nccapparel.com.au/catalogue/'},
-  {sku:'3311', brand:'DNC Workwear', category:'Pants', name:'Cotton Drill Work Pants', source:dncPants},
-  {sku:'3312', brand:'DNC Workwear', category:'Pants', name:'Cotton Drill Cargo Pants', source:dncPants},
-  {sku:'K8044', brand:'Portwest / Huski', category:'Jackets', name:'Huski Freezer Jacket', source:'https://bjsworkwear.com.au/products/huski-hi-vis-contrast-freezer-jacket'},
-  {sku:'3101', brand:'DNC Workwear', category:'Coveralls', name:'Cotton Drill Coverall', source:dncCoveralls},
-  {sku:'3851', brand:'DNC Workwear', category:'Coveralls', name:'Hi-vis Two-Tone Cotton Coverall', source:dncCoveralls},
+  {sku:'WSL503', image:'https://cdn11.bigcommerce.com/s-t8lzk3njin/images/stencil/640x640/products/365/949/WEB-01__02392.1693273665.jpg?c=1', brand:'Workcraft', category:'Shirts', name:'Women’s Hi-Vis Taped Long-Sleeve Shirt', source:'https://www.nccapparel.com.au/catalogue/'},
+  {sku:'3311', image:'https://www.onsitesafetyaustralia.com.au/images/thumbs/0001829_dnc-100-cotton-drill-work-pants-311gsm_1170.jpeg', brand:'DNC Workwear', category:'Pants', name:'Cotton Drill Work Pants', source:dncPants},
+  {sku:'3312', image:'https://cdn11.bigcommerce.com/s-8be69/images/stencil/1280x1280/products/71/23969/3312_Khaki__50951.1724313088.jpg?c=2', brand:'DNC Workwear', category:'Pants', name:'Cotton Drill Cargo Pants', source:dncPants},
+  {sku:'K8044', image:'https://cdn11.bigcommerce.com/s-8be69/images/stencil/1280x1280/products/8042/116439/K8044YFR__34041.1775790374.jpg?c=2', brand:'Portwest / Huski', category:'Jackets', name:'Huski Freezer Jacket', source:'https://bjsworkwear.com.au/products/huski-hi-vis-contrast-freezer-jacket'},
+  {sku:'3101', image:'https://www.workwearhub.com.au/cdn/shop/products/dnc-drill-overall-3101-navy-front_800x.jpg?v=1643681232', brand:'DNC Workwear', category:'Coveralls', name:'Cotton Drill Coverall', source:dncCoveralls},
+  {sku:'3851', image:'https://www.tasworkwear.com.au/images/categories/DNC/3851.jpg', brand:'DNC Workwear', category:'Coveralls', name:'Hi-vis Two-Tone Cotton Coverall', source:dncCoveralls},
 ];
 
 const byId = (id) => document.getElementById(id);
@@ -68,6 +68,14 @@ function renderCatalogue() {
         byId('feedback').textContent = `${product.sku} added to your quote list.`;
       }
     });
+    const photo = element('img', '', 'product-photo');
+    photo.alt = `${product.brand} ${product.sku} ${product.name}`;
+    photo.loading = 'lazy';
+    photo.decoding = 'async';
+    photo.referrerPolicy = 'no-referrer';
+    photo.addEventListener('error', () => photo.remove());
+    photo.src = product.image;
+    card.append(photo);
     card.append(element('p', `${product.brand} · ${product.sku}`), element('h3', product.name), source, button);
     return card;
   }));
