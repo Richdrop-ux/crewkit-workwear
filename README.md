@@ -1,4 +1,4 @@
-# CrewKit Workwear
+# Shiftbrim Workwear
 
 Static, quote-only workwear catalogue.
 
